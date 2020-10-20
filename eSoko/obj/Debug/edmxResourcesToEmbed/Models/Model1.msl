@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MarketingModelStoreContainer" CdmEntityContainer="MarketingEntities1">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="MarketingModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="catid" ColumnName="catid" />
+          <ScalarProperty Name="catname" ColumnName="catname" />
+          <ScalarProperty Name="catimage" ColumnName="catimage" />
+          <ScalarProperty Name="catfkid" ColumnName="catfkid" />
+          <ScalarProperty Name="catstatus" ColumnName="catstatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dboadmins">
+      <EntityTypeMapping TypeName="MarketingModel.dboadmin">
+        <MappingFragment StoreEntitySet="dboadmin">
+          <ScalarProperty Name="adminId" ColumnName="adminId" />
+          <ScalarProperty Name="adminusername" ColumnName="adminusername" />
+          <ScalarProperty Name="adminpassword" ColumnName="adminpassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="MarketingModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="procontact" ColumnName="procontact" />
+          <ScalarProperty Name="proid" ColumnName="proid" />
+          <ScalarProperty Name="proname" ColumnName="proname" />
+          <ScalarProperty Name="proimage" ColumnName="proimage" />
+          <ScalarProperty Name="prodescr" ColumnName="prodescr" />
+          <ScalarProperty Name="proprice" ColumnName="proprice" />
+          <ScalarProperty Name="profkcatid" ColumnName="profkcatid" />
+          <ScalarProperty Name="profkuserid" ColumnName="profkuserid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="MarketingModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="MarketingModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="usercontact" ColumnName="usercontact" />
+          <ScalarProperty Name="useremail" ColumnName="useremail" />
+          <ScalarProperty Name="userpassword" ColumnName="userpassword" />
+          <ScalarProperty Name="userimage" ColumnName="userimage" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MarketingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="catname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="catimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="catfkid" Type="Int32" />
+    <Property Name="catstatus" Type="Int32" />
+    <NavigationProperty Name="dboadmin" Relationship="Self.FK__Category__catfki__145C0A3F" FromRole="Category" ToRole="dboadmin" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__profkca__1BFD2C07" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="dboadmin">
+    <Key>
+      <PropertyRef Name="adminId" />
+    </Key>
+    <Property Name="adminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adminusername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="adminpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK__Category__catfki__145C0A3F" FromRole="dboadmin" ToRole="Category" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="proid" />
+    </Key>
+    <Property Name="proid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="proname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="proimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="prodescr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="proprice" Type="Int32" Nullable="false" />
+    <Property Name="profkcatid" Type="Int32" />
+    <Property Name="profkuserid" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Product__profkca__1BFD2C07" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="User" Relationship="MarketingModel.FK__Product__profkus__1CF15040" FromRole="Product" ToRole="User" />
+    <Property Name="procontact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__Category__catfki__145C0A3F">
+    <End Role="dboadmin" Type="Self.dboadmin" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dboadmin">
+        <PropertyRef Name="adminId" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="catfkid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__profkca__1BFD2C07">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="catid" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="profkcatid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MarketingEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="dboadmins" EntityType="Self.dboadmin" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK__Category__catfki__145C0A3F" Association="Self.FK__Category__catfki__145C0A3F">
+      <End Role="dboadmin" EntitySet="dboadmins" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__profkca__1BFD2C07" Association="Self.FK__Product__profkca__1BFD2C07">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="Users" EntityType="MarketingModel.User" />
+    <AssociationSet Name="FK__Product__profkus__1CF15040" Association="MarketingModel.FK__Product__profkus__1CF15040">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="userimage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="userpassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="useremail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="usercontact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="MarketingModel.FK__Product__profkus__1CF15040" FromRole="User" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK__Product__profkus__1CF15040">
+    <End Type="MarketingModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="MarketingModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userid" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="profkuserid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MarketingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="catid" />
+    </Key>
+    <Property Name="catid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="catname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="catimage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="catfkid" Type="int" />
+    <Property Name="catstatus" Type="int" />
+  </EntityType>
+  <EntityType Name="dboadmin">
+    <Key>
+      <PropertyRef Name="adminId" />
+    </Key>
+    <Property Name="adminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adminusername" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="adminpassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="proid" />
+    </Key>
+    <Property Name="proid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="proname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="proimage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="prodescr" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="proprice" Type="int" Nullable="false" />
+    <Property Name="procontact" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="profkcatid" Type="int" />
+    <Property Name="profkuserid" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="userimage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="userpassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="useremail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="usercontact" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Category__catfki__145C0A3F">
+    <End Role="dboadmin" Type="Self.dboadmin" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dboadmin">
+        <PropertyRef Name="adminId" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="catfkid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MarketingModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="dboadmin" EntityType="Self.dboadmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Category__catfki__145C0A3F" Association="Self.FK__Category__catfki__145C0A3F">
+      <End Role="dboadmin" EntitySet="dboadmin" />
+      <End Role="Category" EntitySet="Category" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
